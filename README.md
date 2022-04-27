@@ -15,9 +15,10 @@ Contudo, apesar da rotina estar implementada, a empresa ainda não definiu qual 
 
 Ou seja, independente das soluções adotadas pela empresa, a rotina deve atender aos seguintes requisitos:
 
-- Caso já exista um usuário com o e-mail informado, um erro deve ser lançado
-- Caso não seja possível salvar o usuário na base de dados, um erro deve ser lançado
-- Caso a notificação por e-mail não tenha sido enviada, um erro deve ser lançado
+- Caso já exista um usuário com o e-mail informado, um erro deve ser lançado X
+- Caso não seja possível salvar o usuário na base de dados, um erro deve ser lançado X
+- Caso a notificação por e-mail não tenha sido enviada, um erro deve ser lançado X
+
 
 Na *suíte* de testes, será necessário alterar o comportamento das classes *UserRepository* e *EmailNotificationService*, sem alterar o código-fonte contido na pasta *src* a fim de viabilizar os casos de teste.
 
