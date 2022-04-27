@@ -1,16 +1,22 @@
 import { RegisterUserOnMailingList } from "../src/register-user-on-mailing-list"
+import { EmailNotificationService } from "../src/email-notification-service";
 import { UserRepository } from "../src/user-repository";
 
 describe('EmailList', () => {
 
     let registerUserOnMailingList: RegisterUserOnMailingList
     let userRepository: UserRepository
+    let emailNotificationService: EmailNotificationService
 
-    beforeEach(function () {
-        userRepository = new UserRepository();
-        registerUserOnMailingList = new RegisterUserOnMailingList(userRepository)
+    //Setar em registeruseronmailinglist
+    beforeEach(()=> {
+        registerUserOnMailingList = new RegisterUserOnMailingList(
+            userRepository = new UserRepository(),
+            emailNotificationService = new EmailNotificationService()
+        )
     })
 
+    //1° caso
     it("Should return an error if e-mail already in use", () => {
 
         const findBy = jest.spyOn(userRepository, 'findBy')
@@ -30,7 +36,7 @@ describe('EmailList', () => {
     })
 
 
-    //2º Case: User already registred - False
+    //2° caso
     it("Should return an error if user not already registred not the system", () => {
         const spy = jest.spyOn(userRepository, 'add')
         spy.mockReturnValue(false)
@@ -42,8 +48,18 @@ describe('EmailList', () => {
         }).toThrow("User not created on database")
     })
 
-    //3º Case: Don't send confirmation e-mail
+    //3° caso
+    it("Should return an error when don't sent e-mail confirmation", () => {
 
+        const spy = jest.spyOn(emailNotificationService, "send")
 
-
+        spy.mockReturnValue(false)
+        expect(() => {
+            registerUserOnMailingList.execute({
+                name: "Jonathan",
+                email: "Jonathan@gmail.com"
+            })
+        }).toThrow("E-mail notification not sent")
+        
+    })
 })
