@@ -38,8 +38,8 @@ describe('EmailList', () => {
 
     //2° caso
     it("Should return an error if user not already registred not the system", () => {
-        const spy = jest.spyOn(userRepository, 'add')
-        spy.mockReturnValue(false)
+        const Add = jest.spyOn(userRepository, 'add')
+        Add.mockReturnValue(false)
         expect(() => {
             registerUserOnMailingList.execute({
                 name: 'Marcos',
@@ -51,9 +51,9 @@ describe('EmailList', () => {
     //3° caso
     it("Should return an error when don't sent e-mail confirmation", () => {
 
-        const spy = jest.spyOn(emailNotificationService, "send")
+        const Send = jest.spyOn(emailNotificationService, "send")
 
-        spy.mockReturnValue(false)
+        Send.mockReturnValue(false)
         expect(() => {
             registerUserOnMailingList.execute({
                 name: "Jonathan",
